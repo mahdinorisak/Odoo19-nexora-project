@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="cron_nexora_low_stock" model="ir.cron">
+        <field name="name">Nexora: Low Stock Check</field>
+        <field name="model_id" ref="model_nexora_product"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_check_low_stock()</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active" eval="True"/>
+    </record>
+
+</odoo>

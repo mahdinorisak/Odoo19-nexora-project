@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_nexora_root" name="Nexora" sequence="10"
+              groups="group_nexora_user"/>
+
+    <menuitem id="menu_nexora_products" name="Products"
+              parent="menu_nexora_root" sequence="10"/>
+
+    <menuitem id="menu_nexora_product" name="Products"
+              parent="menu_nexora_products"
+              action="action_nexora_product" sequence="10"/>
+
+    <menuitem id="menu_nexora_product_category" name="Product Categories"
+              parent="menu_nexora_products"
+              action="action_nexora_product_category" sequence="20"/>
+
+    <menuitem id="menu_nexora_product_type" name="Product Types"
+              parent="menu_nexora_products"
+              action="action_nexora_product_type" sequence="30"/>
+
+    <menuitem id="menu_nexora_material" name="Materials"
+              parent="menu_nexora_products"
+              action="action_nexora_material" sequence="40"/>
+
+    <menuitem id="menu_nexora_printing" name="Printing / Customization"
+              parent="menu_nexora_root" sequence="95"/>
+
+    <menuitem id="menu_nexora_printing_type" name="Printing Types"
+              parent="menu_nexora_printing"
+              action="action_nexora_printing_type" sequence="10"/>
+
+    <menuitem id="menu_nexora_printing_option" name="Printing Options"
+              parent="menu_nexora_printing"
+              action="action_nexora_printing_option" sequence="20"/>
+
+    <menuitem id="menu_nexora_customers" name="Customers"
+              parent="menu_nexora_root" sequence="30"/>
+
+    <menuitem id="menu_nexora_customer" name="Customers"
+              parent="menu_nexora_customers"
+              action="action_nexora_customer" sequence="10"/>
+
+    <menuitem id="menu_nexora_customer_type" name="Customer Types"
+              parent="menu_nexora_customers"
+              action="action_nexora_customer_type" sequence="20"/>
+
+    <menuitem id="menu_nexora_vendors" name="Vendors"
+              parent="menu_nexora_root" sequence="40"/>
+
+    <menuitem id="menu_nexora_vendor" name="Vendors"
+              parent="menu_nexora_vendors"
+              action="action_nexora_vendor" sequence="10"/>
+
+    <menuitem id="menu_nexora_vendor_category" name="Vendor Categories"
+              parent="menu_nexora_vendors"
+              action="action_nexora_vendor_category" sequence="20"/>
+
+    <menuitem id="menu_nexora_sales" name="Sales"
+              parent="menu_nexora_root" sequence="5"/>
+
+    <menuitem id="menu_nexora_quotation" name="Quotations"
+              parent="menu_nexora_sales"
+              action="action_nexora_quotation" sequence="10"/>
+
+    <menuitem id="menu_nexora_sale_order" name="Sales Orders"
+              parent="menu_nexora_sales"
+              action="action_nexora_sale_order" sequence="20"/>
+
+    <menuitem id="menu_nexora_purchases" name="Purchases"
+              parent="menu_nexora_root" sequence="60"/>
+
+    <menuitem id="menu_nexora_purchase_order" name="Purchase Orders"
+              parent="menu_nexora_purchases"
+              action="action_nexora_purchase_order" sequence="10"/>
+
+    <menuitem id="menu_nexora_inventory" name="Inventory"
+              parent="menu_nexora_root" sequence="70"/>
+
+    <menuitem id="menu_nexora_stock" name="Stock"
+              parent="menu_nexora_inventory"
+              action="action_nexora_stock" sequence="10"/>
+
+    <menuitem id="menu_nexora_stock_move" name="Stock Movements"
+              parent="menu_nexora_inventory"
+              action="action_nexora_stock_move" sequence="20"/>
+
+    <menuitem id="menu_nexora_warehouse" name="Warehouses"
+              parent="menu_nexora_inventory"
+              action="action_nexora_warehouse" sequence="30"/>
+
+    <menuitem id="menu_nexora_location" name="Locations"
+              parent="menu_nexora_inventory"
+              action="action_nexora_location" sequence="40"/>
+
+    <menuitem id="menu_nexora_manufacturing" name="Manufacturing"
+              parent="menu_nexora_root" sequence="80"/>
+
+    <menuitem id="menu_nexora_mo" name="Manufacturing Orders"
+              parent="menu_nexora_manufacturing"
+              action="action_nexora_manufacturing_order" sequence="10"/>
+
+    <menuitem id="menu_nexora_bom" name="Bills of Materials"
+              parent="menu_nexora_manufacturing"
+              action="action_nexora_bom" sequence="20"/>
+
+    <menuitem id="menu_nexora_employees" name="Employees"
+              parent="menu_nexora_root" sequence="90"/>
+
+    <menuitem id="menu_nexora_employee" name="Employees"
+              parent="menu_nexora_employees"
+              action="action_nexora_employee" sequence="10"/>
+
+    <menuitem id="menu_nexora_department" name="Departments"
+              parent="menu_nexora_employees"
+              action="action_nexora_department" sequence="20"/>
+
+    <menuitem id="menu_nexora_reports" name="Reports"
+              parent="menu_nexora_root" sequence="100"/>
+
+    <menuitem id="menu_nexora_stock_report" name="Stock Report"
+              parent="menu_nexora_reports"
+              action="action_nexora_stock_report_wizard" sequence="10"/>
+
+    <menuitem id="menu_nexora_sale_line" name="Order Lines"
+              parent="menu_nexora_sales"
+              action="action_nexora_sale_order_line" sequence="30"/>
+
+    <menuitem id="menu_nexora_purchase_line" name="Purchase Lines"
+              parent="menu_nexora_purchases"
+              action="action_nexora_purchase_order_line" sequence="20"/>
+
+</odoo>

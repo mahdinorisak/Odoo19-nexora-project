@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_stock_moves" model="ir.actions.report">
+        <field name="name">Stock Movements Report</field>
+        <field name="model">nexora.stock.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">nexora_app.report_stock_moves_document</field>
+        <field name="report_file">nexora_app.report_stock_moves_document</field>
+    </record>
+
+    <template id="report_stock_moves_document">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2>Stock Movements Report</h2>
+                    <p>
+                        <strong>Period:</strong>
+                        <span t-esc="data.get('date_from') or 'start'"/> to
+                        <span t-esc="data.get('date_to') or 'today'"/>
+                    </p>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Move</th>
+                                <th>Date</th>
+                                <th>Product</th>
+                                <th class="text-end">Qty</th>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="moves" t-as="m">
+                                <td><span t-field="m.name"/></td>
+                                <td><span t-field="m.date"/></td>
+                                <td><span t-field="m.product_id"/></td>
+                                <td class="text-end"><span t-field="m.quantity"/></td>
+                                <td><span t-field="m.location_src_id"/></td>
+                                <td><span t-field="m.location_dest_id"/></td>
+                                <td><span t-field="m.move_type"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>
+                        <strong>Total incoming:</strong> <span t-esc="total_in"/> |
+                        <strong>Total outgoing:</strong> <span t-esc="total_out"/>
+                    </p>
+                    <p t-if="not moves"><em>No done stock movements in this period.</em></p>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

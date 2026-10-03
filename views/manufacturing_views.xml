@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="nexora_mo_view_list" model="ir.ui.view">
+        <field name="name">nexora.manufacturing.order.list</field>
+        <field name="model">nexora.manufacturing.order</field>
+        <field name="arch" type="xml">
+            <list decoration-muted="state == 'cancel'" decoration-success="state == 'done'">
+                <field name="name"/>
+                <field name="date_planned"/>
+                <field name="product_id"/>
+                <field name="quantity"/>
+                <field name="user_id"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nexora_mo_view_form" model="ir.ui.view">
+        <field name="name">nexora.manufacturing.order.form</field>
+        <field name="model">nexora.manufacturing.order</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_start" string="Start" type="object"
+                            class="btn-primary" invisible="state != 'confirmed'"/>
+                    <button name="action_done" string="Produce" type="object"
+                            class="btn-primary" invisible="state != 'progress'"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            invisible="state not in ('draft', 'confirmed', 'progress')"/>
+                    <button name="action_draft" string="Back to Draft" type="object"
+                            invisible="state != 'cancel'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirmed,progress,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="product_id" readonly="state != 'draft'"/>
+                            <field name="bom_id" readonly="state != 'draft'"/>
+                            <field name="quantity" readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="date_planned" readonly="state != 'draft'"/>
+                            <field name="user_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Components">
+                            <field name="line_ids" readonly="True">
+                                <list decoration-danger="available &lt; quantity">
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                    <field name="available"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="nexora_mo_view_search" model="ir.ui.view">
+        <field name="name">nexora.manufacturing.order.search</field>
+        <field name="model">nexora.manufacturing.order</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="product_id"/>
+                <filter name="state_draft" string="Draft"
+                        domain="[('state', '=', 'draft')]"/>
+                <filter name="state_progress" string="In Progress"
+                        domain="[('state', 'in', ['confirmed', 'progress'])]"/>
+                <filter name="state_done" string="Done"
+                        domain="[('state', '=', 'done')]"/>
+                <group>
+                    <filter name="group_product" string="Product"
+                            context="{'group_by': 'product_id'}"/>
+                    <filter name="group_state" string="Status"
+                            context="{'group_by': 'state'}"/>
+                    <filter name="group_month" string="Planned Month"
+                            context="{'group_by': 'date_planned:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_nexora_manufacturing_order" model="ir.actions.act_window">
+        <field name="name">Manufacturing Orders</field>
+        <field name="res_model">nexora.manufacturing.order</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

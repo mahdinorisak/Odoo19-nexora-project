@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="nexora_customer_view_form_partner" model="ir.ui.view">
+        <field name="name">nexora.customer.form.partner</field>
+        <field name="model">nexora.customer</field>
+        <field name="inherit_id" ref="nexora_customer_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="action_create_partner" string="Create Contact"
+                            type="object" class="btn-primary"
+                            invisible="partner_id or not id"/>
+                    <button name="action_open_partner" string="Open Contact"
+                            type="object" invisible="not partner_id"/>
+                </header>
+            </xpath>
+            <field name="customer_type_id" position="after">
+                <field name="partner_id" readonly="True"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="res_partner_view_form_nexora" model="ir.ui.view">
+        <field name="name">res.partner.form.nexora</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="action_view_nexora_customers" type="object"
+                        class="oe_stat_button" icon="fa-industry"
+                        invisible="nexora_customer_count == 0"
+                        groups="nexora_app.group_nexora_user">
+                    <field name="nexora_customer_count" widget="statinfo" string="Nexora"/>
+                </button>
+            </div>
+        </field>
+    </record>
+
+</odoo>

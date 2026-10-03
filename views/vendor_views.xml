@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="nexora_vendor_view_list" model="ir.ui.view">
+        <field name="name">nexora.vendor.list</field>
+        <field name="model">nexora.vendor</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="vendor_category_id"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="lead_time_days"/>
+                <field name="rating" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nexora_vendor_view_form" model="ir.ui.view">
+        <field name="name">nexora.vendor.form</field>
+        <field name="model">nexora.vendor</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                            invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Vendor name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code" readonly="id"/>
+                            <field name="vendor_category_id"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="email" widget="email"/>
+                        </group>
+                        <group>
+                            <field name="street"/>
+                            <field name="city"/>
+                            <field name="country_id"/>
+                            <field name="lead_time_days"/>
+                            <field name="rating"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="nexora_vendor_view_search" model="ir.ui.view">
+        <field name="name">nexora.vendor.search</field>
+        <field name="model">nexora.vendor</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <filter name="top_rated" string="Good or Excellent"
+                        domain="[('rating', 'in', ['3', '4'])]"/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter name="group_category" string="Vendor Category"
+                            context="{'group_by': 'vendor_category_id'}"/>
+                    <filter name="group_rating" string="Rating"
+                            context="{'group_by': 'rating'}"/>
+                    <filter name="group_country" string="Country"
+                            context="{'group_by': 'country_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_nexora_vendor" model="ir.actions.act_window">
+        <field name="name">Vendors</field>
+        <field name="res_model">nexora.vendor</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

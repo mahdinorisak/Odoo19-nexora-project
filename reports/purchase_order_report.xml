@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_purchase_order" model="ir.actions.report">
+        <field name="name">Purchase Order PDF</field>
+        <field name="model">nexora.purchase.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">nexora_app.report_purchase_order_document</field>
+        <field name="report_file">nexora_app.report_purchase_order_document</field>
+        <field name="print_report_name">'Purchase Order - %s' % object.name</field>
+        <field name="binding_model_id" ref="model_nexora_purchase_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_purchase_order_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Purchase Order <span t-field="o.name"/></h2>
+                        <div class="row mt-3 mb-3">
+                            <div class="col-6">
+                                <strong>Vendor:</strong> <span t-field="o.vendor_id"/><br/>
+                                <span t-field="o.vendor_id.city"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Order date:</strong> <span t-field="o.order_date"/><br/>
+                                <strong>Expected:</strong> <span t-field="o.expected_date"/><br/>
+                                <strong>Buyer:</strong> <span t-field="o.user_id"/>
+                            </div>
+                        </div>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th class="text-end">Qty</th>
+                                    <th class="text-end">Unit Cost</th>
+                                    <th class="text-end">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.line_ids" t-as="l">
+                                    <td><span t-field="l.description"/></td>
+                                    <td class="text-end"><span t-field="l.quantity"/></td>
+                                    <td class="text-end"><span t-field="l.unit_cost"/></td>
+                                    <td class="text-end"><span t-field="l.subtotal"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-6 offset-6">
+                                <table class="table table-sm">
+                                    <tr><td>Untaxed</td><td class="text-end"><span t-field="o.amount_untaxed"/></td></tr>
+                                    <tr><td>Tax</td><td class="text-end"><span t-field="o.amount_tax"/></td></tr>
+                                    <tr><td><strong>Total</strong></td><td class="text-end"><strong><span t-field="o.amount_total"/></strong></td></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

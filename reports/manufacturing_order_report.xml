@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_manufacturing_order" model="ir.actions.report">
+        <field name="name">Manufacturing Order PDF</field>
+        <field name="model">nexora.manufacturing.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">nexora_app.report_manufacturing_order_document</field>
+        <field name="report_file">nexora_app.report_manufacturing_order_document</field>
+        <field name="print_report_name">'Manufacturing Order - %s' % object.name</field>
+        <field name="binding_model_id" ref="model_nexora_manufacturing_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_manufacturing_order_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Manufacturing Order <span t-field="o.name"/></h2>
+                        <div class="row mt-3 mb-3">
+                            <div class="col-6">
+                                <strong>Product:</strong> <span t-field="o.product_id"/><br/>
+                                <strong>Quantity:</strong> <span t-field="o.quantity"/><br/>
+                                <strong>BOM:</strong> <span t-field="o.bom_id"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Planned:</strong> <span t-field="o.date_planned"/><br/>
+                                <strong>Responsible:</strong> <span t-field="o.user_id"/><br/>
+                                <strong>Status:</strong> <span t-field="o.state"/>
+                            </div>
+                        </div>
+                        <h4>Components</h4>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Component</th>
+                                    <th class="text-end">Required</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.line_ids" t-as="l">
+                                    <td><span t-field="l.product_id"/></td>
+                                    <td class="text-end"><span t-field="l.quantity"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p t-if="o.notes"><span t-field="o.notes"/></p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

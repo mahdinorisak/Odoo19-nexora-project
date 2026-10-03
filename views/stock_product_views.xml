@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="nexora_product_view_form_stock" model="ir.ui.view">
+        <field name="name">nexora.product.form.stock</field>
+        <field name="model">nexora.product</field>
+        <field name="inherit_id" ref="nexora_product_view_form"/>
+        <field name="arch" type="xml">
+            <field name="min_quantity" position="after">
+                <field name="qty_available"/>
+                <field name="low_stock"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="nexora_product_view_list_stock" model="ir.ui.view">
+        <field name="name">nexora.product.list.stock</field>
+        <field name="model">nexora.product</field>
+        <field name="inherit_id" ref="nexora_product_view_list"/>
+        <field name="arch" type="xml">
+            <field name="margin" position="after">
+                <field name="qty_available"/>
+                <field name="low_stock" column_invisible="True"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_nexora_stock" model="ir.actions.act_window">
+        <field name="name">Stock On Hand</field>
+        <field name="res_model">nexora.product</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

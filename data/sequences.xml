@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="seq_nexora_product" model="ir.sequence">
+            <field name="name">Nexora Product</field>
+            <field name="code">nexora.product</field>
+            <field name="prefix">PRD-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_nexora_customer" model="ir.sequence">
+            <field name="name">Nexora Customer</field>
+            <field name="code">nexora.customer</field>
+            <field name="prefix">CUS-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_nexora_vendor" model="ir.sequence">
+            <field name="name">Nexora Vendor</field>
+            <field name="code">nexora.vendor</field>
+            <field name="prefix">VEN-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_nexora_sale_order" model="ir.sequence">
+            <field name="name">Nexora Sale Order</field>
+            <field name="code">nexora.sale.order</field>
+            <field name="prefix">SO-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_nexora_purchase_order" model="ir.sequence">
+            <field name="name">Nexora Purchase Order</field>
+            <field name="code">nexora.purchase.order</field>
+            <field name="prefix">PO-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_nexora_stock_move" model="ir.sequence">
+            <field name="name">Nexora Stock Move</field>
+            <field name="code">nexora.stock.move</field>
+            <field name="prefix">MOV-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_nexora_manufacturing_order" model="ir.sequence">
+            <field name="name">Nexora Manufacturing Order</field>
+            <field name="code">nexora.manufacturing.order</field>
+            <field name="prefix">MO-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_nexora_employee" model="ir.sequence">
+            <field name="name">Nexora Employee</field>
+            <field name="code">nexora.employee</field>
+            <field name="prefix">EMP-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

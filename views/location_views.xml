@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="nexora_location_view_list" model="ir.ui.view">
+        <field name="name">nexora.location.list</field>
+        <field name="model">nexora.location</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="complete_name"/>
+                <field name="usage"/>
+                <field name="warehouse_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nexora_location_view_form" model="ir.ui.view">
+        <field name="name">nexora.location.form</field>
+        <field name="model">nexora.location</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="parent_id"/>
+                            <field name="complete_name"/>
+                        </group>
+                        <group>
+                            <field name="usage"/>
+                            <field name="warehouse_id"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nexora_location_view_search" model="ir.ui.view">
+        <field name="name">nexora.location.search</field>
+        <field name="model">nexora.location</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="complete_name"/>
+                <filter name="internal" string="Internal"
+                        domain="[('usage', '=', 'internal')]"/>
+                <filter name="archived" string="Archived"
+                        domain="[('active', '=', False)]"/>
+                <group>
+                    <filter name="group_usage" string="Usage"
+                            context="{'group_by': 'usage'}"/>
+                    <filter name="group_warehouse" string="Warehouse"
+                            context="{'group_by': 'warehouse_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_nexora_location" model="ir.actions.act_window">
+        <field name="name">Locations</field>
+        <field name="res_model">nexora.location</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

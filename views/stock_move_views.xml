@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="nexora_stock_move_view_list" model="ir.ui.view">
+        <field name="name">nexora.stock.move.list</field>
+        <field name="model">nexora.stock.move</field>
+        <field name="arch" type="xml">
+            <list decoration-muted="state == 'cancel'" decoration-success="state == 'done'">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="product_id"/>
+                <field name="quantity"/>
+                <field name="location_src_id"/>
+                <field name="location_dest_id"/>
+                <field name="move_type" widget="badge"/>
+                <field name="reference"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nexora_stock_move_view_form" model="ir.ui.view">
+        <field name="name">nexora.stock.move.form</field>
+        <field name="model">nexora.stock.move</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_done" string="Validate" type="object"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            invisible="state != 'draft'"/>
+                    <button name="action_draft" string="Back to Draft" type="object"
+                            invisible="state != 'cancel'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="product_id" readonly="state != 'draft'"/>
+                            <field name="quantity" readonly="state != 'draft'"/>
+                            <field name="reference" readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="location_src_id" readonly="state != 'draft'"/>
+                            <field name="location_dest_id" readonly="state != 'draft'"/>
+                            <field name="date" readonly="state != 'draft'"/>
+                            <field name="move_type"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nexora_stock_move_view_search" model="ir.ui.view">
+        <field name="name">nexora.stock.move.search</field>
+        <field name="model">nexora.stock.move</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="reference"/>
+                <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="done" string="Done" domain="[('state', '=', 'done')]"/>
+                <filter name="incoming" string="Incoming" domain="[('move_type', '=', 'in')]"/>
+                <filter name="outgoing" string="Outgoing" domain="[('move_type', '=', 'out')]"/>
+                <group>
+                    <filter name="group_product" string="Product"
+                            context="{'group_by': 'product_id'}"/>
+                    <filter name="group_type" string="Type"
+                            context="{'group_by': 'move_type'}"/>
+                    <filter name="group_state" string="Status"
+                            context="{'group_by': 'state'}"/>
+                    <filter name="group_month" string="Month"
+                            context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_nexora_stock_move" model="ir.actions.act_window">
+        <field name="name">Stock Movements</field>
+        <field name="res_model">nexora.stock.move</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>
