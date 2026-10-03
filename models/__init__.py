@@ -29,3 +29,4 @@ from . import purchase_request
 from . import purchase_request_line
 from . import inventory_adjustment
 from . import inventory_adjustment_line
+from . import uom

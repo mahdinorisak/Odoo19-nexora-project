@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Units of measure -->
+    <record id="nexora_uom_view_list" model="ir.ui.view">
+        <field name="name">nexora.uom.list</field>
+        <field name="model">nexora.uom</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="product_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nexora_uom_view_form" model="ir.ui.view">
+        <field name="name">nexora.uom.form</field>
+        <field name="model">nexora.uom</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                            invisible="active"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="product_count"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nexora_uom_view_search" model="ir.ui.view">
+        <field name="name">nexora.uom.search</field>
+        <field name="model">nexora.uom</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <filter name="archived" string="Archived"
+                        domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_nexora_uom" model="ir.actions.act_window">
+        <field name="name">Units of Measure</field>
+        <field name="res_model">nexora.uom</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Product -->
+    <record id="nexora_product_view_form_uom" model="ir.ui.view">
+        <field name="name">nexora.product.form.uom</field>
+        <field name="model">nexora.product</field>
+        <field name="inherit_id" ref="nexora_product_view_form"/>
+        <field name="arch" type="xml">
+            <field name="material_id" position="after">
+                <field name="uom_id" required="1"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="nexora_product_view_list_uom" model="ir.ui.view">
+        <field name="name">nexora.product.list.uom</field>
+        <field name="model">nexora.product</field>
+        <field name="inherit_id" ref="nexora_product_view_list"/>
+        <field name="arch" type="xml">
+            <field name="material_id" position="after">
+                <field name="uom_id"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Sale order lines -->
+    <record id="nexora_sale_order_view_form_uom" model="ir.ui.view">
+        <field name="name">nexora.sale.order.form.uom</field>
+        <field name="model">nexora.sale.order</field>
+        <field name="inherit_id" ref="nexora_sale_order_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/list/field[@name='quantity']"
+                   position="after">
+                <field name="uom_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Purchase order lines -->
+    <record id="nexora_purchase_order_view_form_uom" model="ir.ui.view">
+        <field name="name">nexora.purchase.order.form.uom</field>
+        <field name="model">nexora.purchase.order</field>
+        <field name="inherit_id" ref="nexora_purchase_order_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/list/field[@name='quantity']"
+                   position="after">
+                <field name="uom_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- BOM lines -->
+    <record id="nexora_bom_view_form_uom" model="ir.ui.view">
+        <field name="name">nexora.bom.form.uom</field>
+        <field name="model">nexora.bom</field>
+        <field name="inherit_id" ref="nexora_bom_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/list/field[@name='quantity']"
+                   position="after">
+                <field name="uom_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Manufacturing order components -->
+    <record id="nexora_mo_view_form_uom" model="ir.ui.view">
+        <field name="name">nexora.manufacturing.order.form.uom</field>
+        <field name="model">nexora.manufacturing.order</field>
+        <field name="inherit_id" ref="nexora_mo_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/list/field[@name='quantity']"
+                   position="after">
+                <field name="uom_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Purchase request lines -->
+    <record id="nexora_purchase_request_view_form_uom" model="ir.ui.view">
+        <field name="name">nexora.purchase.request.form.uom</field>
+        <field name="model">nexora.purchase.request</field>
+        <field name="inherit_id" ref="nexora_purchase_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/list/field[@name='quantity']"
+                   position="after">
+                <field name="uom_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Stock moves -->
+    <record id="nexora_stock_move_view_list_uom" model="ir.ui.view">
+        <field name="name">nexora.stock.move.list.uom</field>
+        <field name="model">nexora.stock.move</field>
+        <field name="inherit_id" ref="nexora_stock_move_view_list"/>
+        <field name="arch" type="xml">
+            <field name="quantity" position="after">
+                <field name="uom_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="nexora_stock_move_view_form_uom" model="ir.ui.view">
+        <field name="name">nexora.stock.move.form.uom</field>
+        <field name="model">nexora.stock.move</field>
+        <field name="inherit_id" ref="nexora_stock_move_view_form"/>
+        <field name="arch" type="xml">
+            <field name="quantity" position="after">
+                <field name="uom_id"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

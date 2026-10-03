@@ -153,3 +153,16 @@ class TestNexora(TransactionCase):
         Line.create({'adjustment_id': adjustment.id, 'product_id': self.plank.id})
         with self.assertRaises(ValidationError):
             Line.create({'adjustment_id': adjustment.id, 'product_id': self.plank.id})
+
+    # Units of measure
+    def test_units_of_measure(self):
+        piece = self.env.ref('nexora_app.uom_piece')
+        meter = self.env.ref('nexora_app.uom_meter')
+        self.assertEqual(self.chair.uom_id, piece)
+        self.plank.uom_id = meter
+        move = self._move(self.plank, 1, self.vendors, self.stock)
+        self.assertEqual(move.uom_id, meter)
+
+    def test_unit_name_must_be_unique(self):
+        with self.assertRaises(ValidationError):
+            self.env['nexora.uom'].create({'name': 'Piece', 'code': 'x'})

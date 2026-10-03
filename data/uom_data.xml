@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="uom_piece" model="nexora.uom">
+            <field name="name">Piece</field>
+            <field name="code">pcs</field>
+        </record>
+
+        <record id="uom_meter" model="nexora.uom">
+            <field name="name">Meter</field>
+            <field name="code">m</field>
+        </record>
+
+        <record id="uom_square_meter" model="nexora.uom">
+            <field name="name">Square Meter</field>
+            <field name="code">m2</field>
+        </record>
+
+        <record id="uom_kilogram" model="nexora.uom">
+            <field name="name">Kilogram</field>
+            <field name="code">kg</field>
+        </record>
+
+    </data>
+
+    <!-- Runs on every upgrade: gives a unit to products that have none -->
+    <function model="nexora.uom" name="_assign_default_units"/>
+</odoo>

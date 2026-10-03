@@ -161,4 +161,8 @@
               parent="menu_nexora_inventory"
               action="action_nexora_inventory_adjustment" sequence="25"/>
 
+    <menuitem id="menu_nexora_uom" name="Units of Measure"
+              parent="menu_nexora_products"
+              action="action_nexora_uom" sequence="50"/>
+
 </odoo>

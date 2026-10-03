@@ -76,3 +76,5 @@ access_nexora_inventory_adjustment_user,nexora.inventory.adjustment user,model_n
 access_nexora_inventory_adjustment_line_user,nexora.inventory.adjustment.line user,model_nexora_inventory_adjustment_line,group_nexora_user,1,0,0,0
 access_nexora_inventory_adjustment_production,nexora.inventory.adjustment production,model_nexora_inventory_adjustment,group_nexora_production_manager,1,1,1,1
 access_nexora_inventory_adjustment_line_production,nexora.inventory.adjustment.line production,model_nexora_inventory_adjustment_line,group_nexora_production_manager,1,1,1,1
+access_nexora_uom_user,nexora.uom user,model_nexora_uom,group_nexora_user,1,0,0,0
+access_nexora_uom_production,nexora.uom production,model_nexora_uom,group_nexora_production_manager,1,1,1,1

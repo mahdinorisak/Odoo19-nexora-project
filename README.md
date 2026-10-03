@@ -21,6 +21,7 @@ A custom Odoo 19 application for a furniture business: manufacturing, customizat
 - **Dashboard:** graph and pivot analysis for sales, stock and production, plus a low-stock list
 - **Purchase requests:** approval workflow that creates a purchase order
 - **Inventory adjustments:** stock counts that post correction moves
+- **Units of measure:** a unit on every product, shown on all order, BOM and stock lines
 - **Advanced:** model and view inheritance, a JSON route, an email template, a scheduled low-stock check and automated tests
 
 ## Requirements
@@ -48,7 +49,6 @@ python odoo-bin -c odoo.conf -d test_db -i nexora_app --test-tags /nexora_app --
 
 ## Roadmap
 
-- Units of measure
 - Custom designs
 - Job positions and product variants
 - Configuration menu and demo data
