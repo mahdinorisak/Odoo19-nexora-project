@@ -23,3 +23,9 @@ from . import employee
 from . import department
 from . import customer_partner
 from . import res_partner
+from . import sale_line_report
+from . import product_dashboard
+from . import purchase_request
+from . import purchase_request_line
+from . import inventory_adjustment
+from . import inventory_adjustment_line

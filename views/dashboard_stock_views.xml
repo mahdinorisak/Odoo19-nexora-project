@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Stock analysis (moves) -->
+    <record id="nexora_stock_move_view_graph" model="ir.ui.view">
+        <field name="name">nexora.stock.move.graph</field>
+        <field name="model">nexora.stock.move</field>
+        <field name="arch" type="xml">
+            <graph string="Moves by Product" type="bar">
+                <field name="product_id"/>
+                <field name="move_type"/>
+                <field name="quantity" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="nexora_stock_move_view_pivot" model="ir.ui.view">
+        <field name="name">nexora.stock.move.pivot</field>
+        <field name="model">nexora.stock.move</field>
+        <field name="arch" type="xml">
+            <pivot string="Stock Analysis">
+                <field name="product_id" type="row"/>
+                <field name="move_type" type="col"/>
+                <field name="quantity" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_nexora_stock_analysis" model="ir.actions.act_window">
+        <field name="name">Stock Analysis</field>
+        <field name="res_model">nexora.stock.move</field>
+        <field name="view_mode">graph,pivot,list,form</field>
+        <field name="context">{'search_default_done': 1}</field>
+    </record>
+
+    <!-- Production analysis (manufacturing orders) -->
+    <record id="nexora_mo_view_graph" model="ir.ui.view">
+        <field name="name">nexora.manufacturing.order.graph</field>
+        <field name="model">nexora.manufacturing.order</field>
+        <field name="arch" type="xml">
+            <graph string="Production by Product" type="bar">
+                <field name="product_id"/>
+                <field name="state"/>
+                <field name="quantity" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="nexora_mo_view_pivot" model="ir.ui.view">
+        <field name="name">nexora.manufacturing.order.pivot</field>
+        <field name="model">nexora.manufacturing.order</field>
+        <field name="arch" type="xml">
+            <pivot string="Production Analysis">
+                <field name="product_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="quantity" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_nexora_production_analysis" model="ir.actions.act_window">
+        <field name="name">Production Analysis</field>
+        <field name="res_model">nexora.manufacturing.order</field>
+        <field name="view_mode">graph,pivot,list,form</field>
+    </record>
+
+    <!-- Low stock products -->
+    <record id="nexora_product_view_search_low_stock" model="ir.ui.view">
+        <field name="name">nexora.product.search.low.stock</field>
+        <field name="model">nexora.product</field>
+        <field name="inherit_id" ref="nexora_product_view_search"/>
+        <field name="arch" type="xml">
+            <field name="material_id" position="after">
+                <filter name="low_stock" string="Low Stock"
+                        domain="[('low_stock', '=', True)]"/>
+                <separator/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_nexora_low_stock" model="ir.actions.act_window">
+        <field name="name">Low Stock Products</field>
+        <field name="res_model">nexora.product</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('low_stock', '=', True)]</field>
+    </record>
+
+</odoo>

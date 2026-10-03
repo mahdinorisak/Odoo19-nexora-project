@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="nexora_inventory_adjustment_view_list" model="ir.ui.view">
+        <field name="name">nexora.inventory.adjustment.list</field>
+        <field name="model">nexora.inventory.adjustment</field>
+        <field name="arch" type="xml">
+            <list decoration-muted="state == 'cancel'" decoration-success="state == 'done'">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="location_id"/>
+                <field name="user_id"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nexora_inventory_adjustment_view_form" model="ir.ui.view">
+        <field name="name">nexora.inventory.adjustment.form</field>
+        <field name="model">nexora.inventory.adjustment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_start" string="Start Counting" type="object"
+                            class="btn-primary" invisible="state != 'draft'"
+                            groups="nexora_app.group_nexora_production_manager"/>
+                    <button name="action_validate" string="Validate" type="object"
+                            class="btn-primary" invisible="state != 'counting'"
+                            groups="nexora_app.group_nexora_production_manager"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            invisible="state not in ('draft', 'counting')"
+                            groups="nexora_app.group_nexora_production_manager"/>
+                    <button name="action_draft" string="Back to Draft" type="object"
+                            invisible="state != 'cancel'"
+                            groups="nexora_app.group_nexora_production_manager"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,counting,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_moves" type="object"
+                                class="oe_stat_button" icon="fa-exchange"
+                                invisible="state != 'done'">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Stock Moves</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="location_id" readonly="state != 'draft'"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group>
+                            <field name="date" readonly="state != 'draft'"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Counted Products">
+                            <field name="line_ids" readonly="state in ('done', 'cancel')">
+                                <list editable="bottom" create="0"
+                                      decoration-danger="difference &lt; 0"
+                                      decoration-success="difference &gt; 0">
+                                    <field name="product_id" readonly="True"/>
+                                    <field name="theoretical_qty" readonly="True"/>
+                                    <field name="counted_qty"/>
+                                    <field name="difference"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Reason">
+                            <field name="reason" readonly="state in ('done', 'cancel')"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="nexora_inventory_adjustment_view_search" model="ir.ui.view">
+        <field name="name">nexora.inventory.adjustment.search</field>
+        <field name="model">nexora.inventory.adjustment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="location_id"/>
+                <field name="user_id"/>
+                <filter name="counting" string="Counting"
+                        domain="[('state', '=', 'counting')]"/>
+                <filter name="done" string="Done" domain="[('state', '=', 'done')]"/>
+                <group>
+                    <filter name="group_location" string="Location"
+                            context="{'group_by': 'location_id'}"/>
+                    <filter name="group_state" string="Status"
+                            context="{'group_by': 'state'}"/>
+                    <filter name="group_month" string="Month"
+                            context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_nexora_inventory_adjustment" model="ir.actions.act_window">
+        <field name="name">Inventory Adjustments</field>
+        <field name="res_model">nexora.inventory.adjustment</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

@@ -129,3 +129,27 @@ class TestNexora(TransactionCase):
         mo.action_confirm()
         with self.assertRaises(UserError):
             mo.action_start()
+
+    # Inventory adjustments
+    def test_inventory_adjustment(self):
+        self._move(self.plank, 10, self.vendors, self.stock)
+        admin = self.env.ref('base.user_admin')
+        adjustment = self.env['nexora.inventory.adjustment'].with_user(admin).create(
+            {'location_id': self.stock.id})
+        adjustment.action_start()
+        line = adjustment.line_ids.filtered(lambda l: l.product_id == self.plank)
+        self.assertEqual(line.theoretical_qty, 10)
+        line.counted_qty = 7
+        self.assertEqual(line.difference, -3)
+        adjustment.action_validate()
+        self.plank.invalidate_recordset()
+        self.assertEqual(adjustment.state, 'done')
+        self.assertEqual(self.plank.qty_available, 7)
+
+    def test_adjustment_line_must_be_unique(self):
+        adjustment = self.env['nexora.inventory.adjustment'].create(
+            {'location_id': self.stock.id})
+        Line = self.env['nexora.inventory.adjustment.line']
+        Line.create({'adjustment_id': adjustment.id, 'product_id': self.plank.id})
+        with self.assertRaises(ValidationError):
+            Line.create({'adjustment_id': adjustment.id, 'product_id': self.plank.id})

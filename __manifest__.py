@@ -8,6 +8,7 @@
     'depends': ['base', 'mail'],
     'data': [
         'security/security.xml',
+        'security/purchase_request_security.xml',
         'data/sequences.xml',
         'security/ir.model.access.csv',
         'data/stock_data.xml',
@@ -41,6 +42,10 @@
         'data/cron.xml',
         'views/line_views.xml',
         'views/warehouse_search_views.xml',
+        'views/dashboard_sales_views.xml',
+        'views/dashboard_stock_views.xml',
+        'views/purchase_request_views.xml',
+        'views/inventory_adjustment_views.xml',
         'views/nexora_menus.xml',
     ],
     'installable': True,

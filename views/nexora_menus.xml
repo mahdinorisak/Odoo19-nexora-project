@@ -130,4 +130,35 @@
               parent="menu_nexora_purchases"
               action="action_nexora_purchase_order_line" sequence="20"/>
 
+    <menuitem id="menu_nexora_dashboard" name="Dashboard"
+              parent="menu_nexora_root" sequence="6"/>
+
+    <menuitem id="menu_nexora_sales_analysis" name="Sales Analysis"
+              parent="menu_nexora_dashboard"
+              action="action_nexora_sales_analysis" sequence="10"/>
+
+    <menuitem id="menu_nexora_product_sales" name="Product Sales"
+              parent="menu_nexora_dashboard"
+              action="action_nexora_product_sales" sequence="20"/>
+
+    <menuitem id="menu_nexora_stock_analysis" name="Stock Analysis"
+              parent="menu_nexora_dashboard"
+              action="action_nexora_stock_analysis" sequence="30"/>
+
+    <menuitem id="menu_nexora_production_analysis" name="Production Analysis"
+              parent="menu_nexora_dashboard"
+              action="action_nexora_production_analysis" sequence="40"/>
+
+    <menuitem id="menu_nexora_low_stock" name="Low Stock Products"
+              parent="menu_nexora_dashboard"
+              action="action_nexora_low_stock" sequence="50"/>
+
+    <menuitem id="menu_nexora_purchase_request" name="Purchase Requests"
+              parent="menu_nexora_purchases"
+              action="action_nexora_purchase_request" sequence="5"/>
+
+    <menuitem id="menu_nexora_inventory_adjustment" name="Inventory Adjustments"
+              parent="menu_nexora_inventory"
+              action="action_nexora_inventory_adjustment" sequence="25"/>
+
 </odoo>

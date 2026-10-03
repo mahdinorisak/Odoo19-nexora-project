@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Sales analysis (orders) -->
+    <record id="nexora_sale_order_view_graph" model="ir.ui.view">
+        <field name="name">nexora.sale.order.graph</field>
+        <field name="model">nexora.sale.order</field>
+        <field name="arch" type="xml">
+            <graph string="Sales by Month" type="bar">
+                <field name="order_date" interval="month"/>
+                <field name="amount_total" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="nexora_sale_order_view_pivot" model="ir.ui.view">
+        <field name="name">nexora.sale.order.pivot</field>
+        <field name="model">nexora.sale.order</field>
+        <field name="arch" type="xml">
+            <pivot string="Sales Analysis">
+                <field name="customer_id" type="row"/>
+                <field name="order_date" interval="month" type="col"/>
+                <field name="amount_total" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_nexora_sales_analysis" model="ir.actions.act_window">
+        <field name="name">Sales Analysis</field>
+        <field name="res_model">nexora.sale.order</field>
+        <field name="view_mode">graph,pivot,list,form</field>
+        <field name="context">{'search_default_state_confirmed': 1, 'search_default_state_done': 1}</field>
+    </record>
+
+    <!-- Product sales analysis (order lines) -->
+    <record id="nexora_sale_order_line_view_graph" model="ir.ui.view">
+        <field name="name">nexora.sale.order.line.graph</field>
+        <field name="model">nexora.sale.order.line</field>
+        <field name="arch" type="xml">
+            <graph string="Sales by Product" type="bar">
+                <field name="product_id"/>
+                <field name="subtotal" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="nexora_sale_order_line_view_pivot" model="ir.ui.view">
+        <field name="name">nexora.sale.order.line.pivot</field>
+        <field name="model">nexora.sale.order.line</field>
+        <field name="arch" type="xml">
+            <pivot string="Product Sales">
+                <field name="product_id" type="row"/>
+                <field name="order_date" interval="month" type="col"/>
+                <field name="quantity" type="measure"/>
+                <field name="subtotal" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="nexora_sale_order_line_view_search_inherit" model="ir.ui.view">
+        <field name="name">nexora.sale.order.line.search.inherit</field>
+        <field name="model">nexora.sale.order.line</field>
+        <field name="inherit_id" ref="nexora_sale_order_line_view_search"/>
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field name="customer_id"/>
+                <filter name="confirmed_lines" string="Confirmed / Done"
+                        domain="[('order_state', 'in', ['confirmed', 'done'])]"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_nexora_product_sales" model="ir.actions.act_window">
+        <field name="name">Product Sales</field>
+        <field name="res_model">nexora.sale.order.line</field>
+        <field name="view_mode">graph,pivot,list</field>
+        <field name="context">{'search_default_confirmed_lines': 1}</field>
+    </record>
+
+</odoo>
