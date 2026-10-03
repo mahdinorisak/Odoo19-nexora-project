@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Product: design field and variants tab -->
+    <record id="nexora_product_view_form_design" model="ir.ui.view">
+        <field name="name">nexora.product.form.design</field>
+        <field name="model">nexora.product</field>
+        <field name="inherit_id" ref="nexora_product_view_form"/>
+        <field name="arch" type="xml">
+            <field name="material_id" position="after">
+                <field name="design_id"/>
+            </field>
+            <xpath expr="//notebook" position="inside">
+                <page string="Variants">
+                    <field name="variant_ids">
+                        <list editable="bottom">
+                            <field name="size"/>
+                            <field name="color"/>
+                            <field name="sku"/>
+                            <field name="extra_price"/>
+                            <field name="final_price"/>
+                            <field name="currency_id" column_invisible="True"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="nexora_product_view_list_design" model="ir.ui.view">
+        <field name="name">nexora.product.list.design</field>
+        <field name="model">nexora.product</field>
+        <field name="inherit_id" ref="nexora_product_view_list"/>
+        <field name="arch" type="xml">
+            <field name="material_id" position="after">
+                <field name="design_id" optional="show"/>
+                <field name="variant_count" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="nexora_product_view_search_design" model="ir.ui.view">
+        <field name="name">nexora.product.search.design</field>
+        <field name="model">nexora.product</field>
+        <field name="inherit_id" ref="nexora_product_view_search"/>
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="design_id"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Employee: job position -->
+    <record id="nexora_employee_view_form_job" model="ir.ui.view">
+        <field name="name">nexora.employee.form.job</field>
+        <field name="model">nexora.employee</field>
+        <field name="inherit_id" ref="nexora_employee_view_form"/>
+        <field name="arch" type="xml">
+            <field name="job_title" position="before">
+                <field name="job_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="nexora_employee_view_list_job" model="ir.ui.view">
+        <field name="name">nexora.employee.list.job</field>
+        <field name="model">nexora.employee</field>
+        <field name="inherit_id" ref="nexora_employee_view_list"/>
+        <field name="arch" type="xml">
+            <field name="job_title" position="after">
+                <field name="job_id" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="nexora_employee_view_search_job" model="ir.ui.view">
+        <field name="name">nexora.employee.search.job</field>
+        <field name="model">nexora.employee</field>
+        <field name="inherit_id" ref="nexora_employee_view_search"/>
+        <field name="arch" type="xml">
+            <field name="job_title" position="after">
+                <field name="job_id"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="nexora_product_variant_view_list" model="ir.ui.view">
+        <field name="name">nexora.product.variant.list</field>
+        <field name="model">nexora.product.variant</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="size"/>
+                <field name="color"/>
+                <field name="sku"/>
+                <field name="extra_price"/>
+                <field name="final_price"/>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nexora_product_variant_view_form" model="ir.ui.view">
+        <field name="name">nexora.product.variant.form</field>
+        <field name="model">nexora.product.variant</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                            invisible="active"/>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="product_id"/>
+                            <field name="size"/>
+                            <field name="color"/>
+                            <field name="sku"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="True"/>
+                            <field name="extra_price"/>
+                            <field name="final_price"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nexora_product_variant_view_search" model="ir.ui.view">
+        <field name="name">nexora.product.variant.search</field>
+        <field name="model">nexora.product.variant</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="size"/>
+                <field name="color"/>
+                <field name="sku"/>
+                <filter name="archived" string="Archived"
+                        domain="[('active', '=', False)]"/>
+                <group>
+                    <filter name="group_product" string="Product"
+                            context="{'group_by': 'product_id'}"/>
+                    <filter name="group_color" string="Color"
+                            context="{'group_by': 'color'}"/>
+                    <filter name="group_size" string="Size"
+                            context="{'group_by': 'size'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_nexora_product_variant" model="ir.actions.act_window">
+        <field name="name">Product Variants</field>
+        <field name="res_model">nexora.product.variant</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

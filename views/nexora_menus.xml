@@ -165,4 +165,16 @@
               parent="menu_nexora_products"
               action="action_nexora_uom" sequence="50"/>
 
+    <menuitem id="menu_nexora_design" name="Custom Designs"
+              parent="menu_nexora_printing"
+              action="action_nexora_design" sequence="30"/>
+
+    <menuitem id="menu_nexora_product_variant" name="Product Variants"
+              parent="menu_nexora_products"
+              action="action_nexora_product_variant" sequence="45"/>
+
+    <menuitem id="menu_nexora_job" name="Job Positions"
+              parent="menu_nexora_employees"
+              action="action_nexora_job" sequence="30"/>
+
 </odoo>

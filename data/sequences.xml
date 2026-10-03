@@ -82,5 +82,13 @@
             <field name="company_id" eval="False"/>
         </record>
 
+        <record id="seq_nexora_design" model="ir.sequence">
+            <field name="name">Nexora Design</field>
+            <field name="code">nexora.design</field>
+            <field name="prefix">DSG-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
     </data>
 </odoo>

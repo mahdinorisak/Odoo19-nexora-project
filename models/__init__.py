@@ -30,3 +30,6 @@ from . import purchase_request_line
 from . import inventory_adjustment
 from . import inventory_adjustment_line
 from . import uom
+from . import design
+from . import variant
+from . import job

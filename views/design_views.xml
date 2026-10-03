@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="nexora_design_view_list" model="ir.ui.view">
+        <field name="name">nexora.design.list</field>
+        <field name="model">nexora.design</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="designer_id"/>
+                <field name="product_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nexora_design_view_kanban" model="ir.ui.view">
+        <field name="name">nexora.design.kanban</field>
+        <field name="model">nexora.design</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex">
+                            <field name="image_128" widget="image" class="me-3"
+                                   options="{'img_class': 'o_image_64_cover'}"/>
+                            <div>
+                                <field name="name" class="fw-bold fs-5"/>
+                                <div class="text-muted"><field name="code"/></div>
+                                <div><field name="designer_id"/></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="nexora_design_view_form" model="ir.ui.view">
+        <field name="name">nexora.design.form</field>
+        <field name="model">nexora.design</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                            invisible="active"/>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_products" type="object"
+                                class="oe_stat_button" icon="fa-cubes"
+                                invisible="product_count == 0">
+                            <field name="product_count" widget="statinfo" string="Products"/>
+                        </button>
+                    </div>
+                    <field name="image_1920" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Design name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code" readonly="id"/>
+                            <field name="designer_id"/>
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                        <page string="Products">
+                            <field name="product_ids" readonly="True">
+                                <list>
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                    <field name="sale_price"/>
+                                    <field name="currency_id" column_invisible="True"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="nexora_design_view_search" model="ir.ui.view">
+        <field name="name">nexora.design.search</field>
+        <field name="model">nexora.design</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="designer_id"/>
+                <filter name="archived" string="Archived"
+                        domain="[('active', '=', False)]"/>
+                <group>
+                    <filter name="group_designer" string="Designer"
+                            context="{'group_by': 'designer_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_nexora_design" model="ir.actions.act_window">
+        <field name="name">Custom Designs</field>
+        <field name="res_model">nexora.design</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+</odoo>
