@@ -38,6 +38,12 @@ A custom Odoo 19 application for a furniture business: manufacturing, customizat
 2. Restart Odoo and update the Apps list (developer mode).
 3. Install **Nexora App**.
 
+## Demo data
+
+Odoo 19 loads demo data only when asked. Create a fresh database with:
+
+    python odoo-bin -c odoo.conf -d demo_db -i nexora_app --with-demo
+
 ## Tests
 
 11 automated tests cover totals, stock moves, manufacturing and validation rules.
