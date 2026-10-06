@@ -84,3 +84,4 @@ access_nexora_product_variant_user,nexora.product.variant user,model_nexora_prod
 access_nexora_product_variant_sales,nexora.product.variant sales,model_nexora_product_variant,group_nexora_sales_manager,1,1,1,1
 access_nexora_job_user,nexora.job user,model_nexora_job,group_nexora_user,1,0,0,0
 access_nexora_job_admin,nexora.job admin,model_nexora_job,group_nexora_admin,1,1,1,1
+access_nexora_stock_onhand_user,nexora.stock.onhand user,model_nexora_stock_onhand,group_nexora_user,1,0,0,0

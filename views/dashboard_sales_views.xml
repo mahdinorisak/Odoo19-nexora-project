@@ -6,8 +6,9 @@
         <field name="name">nexora.sale.order.graph</field>
         <field name="model">nexora.sale.order</field>
         <field name="arch" type="xml">
-            <graph string="Sales by Month" type="bar">
+            <graph string="Sales by Month" type="bar" stacked="1">
                 <field name="order_date" interval="month"/>
+                <field name="customer_id"/>
                 <field name="amount_total" type="measure"/>
             </graph>
         </field>

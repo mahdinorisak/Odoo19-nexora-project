@@ -34,3 +34,4 @@ from . import design
 from . import variant
 from . import job
 from . import settings
+from . import stock_onhand

@@ -23,6 +23,7 @@ A custom Odoo 19 application for a furniture business: manufacturing, customizat
 - **Inventory adjustments:** stock counts that post correction moves
 - **Units of measure:** a unit on every product, shown on all order, BOM and stock lines
 - **Custom designs, job positions and variants:** designs with images linked to products, job positions linked to employees, size and color variants with extra prices
+- **Reports menu:** product, sales, purchase, inventory (SQL view) and production reports with pivot and graph views
 - **Advanced:** model and view inheritance, a JSON route, an email template, a scheduled low-stock check and automated tests
 
 ## Requirements

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============ Product report ============ -->
+    <record id="nexora_product_report_pivot" model="ir.ui.view">
+        <field name="name">nexora.product.report.pivot</field>
+        <field name="model">nexora.product</field>
+        <field name="arch" type="xml">
+            <pivot string="Product Report">
+                <field name="category_id" type="row"/>
+                <field name="product_type_id" type="col"/>
+                <field name="margin" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="nexora_product_report_graph" model="ir.ui.view">
+        <field name="name">nexora.product.report.graph</field>
+        <field name="model">nexora.product</field>
+        <field name="arch" type="xml">
+            <graph string="Margin by Category" type="bar">
+                <field name="category_id"/>
+                <field name="margin" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_nexora_product_report" model="ir.actions.act_window">
+        <field name="name">Product Report</field>
+        <field name="res_model">nexora.product</field>
+        <field name="view_mode">pivot,graph,list</field>
+    </record>
+    <record id="action_nexora_product_report_pivot" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="nexora_product_report_pivot"/>
+        <field name="act_window_id" ref="action_nexora_product_report"/>
+    </record>
+    <record id="action_nexora_product_report_graph" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="nexora_product_report_graph"/>
+        <field name="act_window_id" ref="action_nexora_product_report"/>
+    </record>
+
+    <!-- ============ Sales report ============ -->
+    <record id="nexora_sales_report_pivot" model="ir.ui.view">
+        <field name="name">nexora.sales.report.pivot</field>
+        <field name="model">nexora.sale.order</field>
+        <field name="arch" type="xml">
+            <pivot string="Sales Report">
+                <field name="user_id" type="row"/>
+                <field name="order_date" interval="month" type="col"/>
+                <field name="amount_untaxed" type="measure"/>
+                <field name="amount_tax" type="measure"/>
+                <field name="amount_total" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="nexora_sales_report_graph" model="ir.ui.view">
+        <field name="name">nexora.sales.report.graph</field>
+        <field name="model">nexora.sale.order</field>
+        <field name="arch" type="xml">
+            <graph string="Sales by Salesperson" type="bar" stacked="1">
+                <field name="user_id"/>
+                <field name="state"/>
+                <field name="amount_total" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_nexora_sales_report" model="ir.actions.act_window">
+        <field name="name">Sales Report</field>
+        <field name="res_model">nexora.sale.order</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="context">{'search_default_state_confirmed': 1, 'search_default_state_done': 1}</field>
+    </record>
+    <record id="action_nexora_sales_report_pivot" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="nexora_sales_report_pivot"/>
+        <field name="act_window_id" ref="action_nexora_sales_report"/>
+    </record>
+    <record id="action_nexora_sales_report_graph" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="nexora_sales_report_graph"/>
+        <field name="act_window_id" ref="action_nexora_sales_report"/>
+    </record>
+
+    <!-- ============ Purchase report ============ -->
+    <record id="nexora_purchase_report_pivot" model="ir.ui.view">
+        <field name="name">nexora.purchase.report.pivot</field>
+        <field name="model">nexora.purchase.order</field>
+        <field name="arch" type="xml">
+            <pivot string="Purchase Report">
+                <field name="vendor_id" type="row"/>
+                <field name="order_date" interval="month" type="col"/>
+                <field name="amount_untaxed" type="measure"/>
+                <field name="amount_total" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="nexora_purchase_report_graph" model="ir.ui.view">
+        <field name="name">nexora.purchase.report.graph</field>
+        <field name="model">nexora.purchase.order</field>
+        <field name="arch" type="xml">
+            <graph string="Purchases by Vendor" type="bar" stacked="1">
+                <field name="vendor_id"/>
+                <field name="state"/>
+                <field name="amount_total" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_nexora_purchase_report" model="ir.actions.act_window">
+        <field name="name">Purchase Report</field>
+        <field name="res_model">nexora.purchase.order</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="context">{'search_default_state_confirmed': 1, 'search_default_state_received': 1}</field>
+    </record>
+    <record id="action_nexora_purchase_report_pivot" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="nexora_purchase_report_pivot"/>
+        <field name="act_window_id" ref="action_nexora_purchase_report"/>
+    </record>
+    <record id="action_nexora_purchase_report_graph" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="nexora_purchase_report_graph"/>
+        <field name="act_window_id" ref="action_nexora_purchase_report"/>
+    </record>
+
+    <!-- ============ Production report ============ -->
+    <record id="nexora_production_report_pivot" model="ir.ui.view">
+        <field name="name">nexora.production.report.pivot</field>
+        <field name="model">nexora.manufacturing.order</field>
+        <field name="arch" type="xml">
+            <pivot string="Production Report">
+                <field name="product_id" type="row"/>
+                <field name="date_planned" interval="month" type="col"/>
+                <field name="quantity" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="nexora_production_report_graph" model="ir.ui.view">
+        <field name="name">nexora.production.report.graph</field>
+        <field name="model">nexora.manufacturing.order</field>
+        <field name="arch" type="xml">
+            <graph string="Production by Product" type="bar" stacked="1">
+                <field name="product_id"/>
+                <field name="state"/>
+                <field name="quantity" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_nexora_production_report" model="ir.actions.act_window">
+        <field name="name">Production Report</field>
+        <field name="res_model">nexora.manufacturing.order</field>
+        <field name="view_mode">pivot,graph,list</field>
+    </record>
+    <record id="action_nexora_production_report_pivot" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="nexora_production_report_pivot"/>
+        <field name="act_window_id" ref="action_nexora_production_report"/>
+    </record>
+    <record id="action_nexora_production_report_graph" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="nexora_production_report_graph"/>
+        <field name="act_window_id" ref="action_nexora_production_report"/>
+    </record>
+
+    <!-- ============ Inventory report (SQL view) ============ -->
+    <record id="nexora_stock_onhand_view_list" model="ir.ui.view">
+        <field name="name">nexora.stock.onhand.list</field>
+        <field name="model">nexora.stock.onhand</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0" delete="0">
+                <field name="product_id"/>
+                <field name="location_id"/>
+                <field name="quantity" sum="Total"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nexora_stock_onhand_view_pivot" model="ir.ui.view">
+        <field name="name">nexora.stock.onhand.pivot</field>
+        <field name="model">nexora.stock.onhand</field>
+        <field name="arch" type="xml">
+            <pivot string="Inventory Report">
+                <field name="product_id" type="row"/>
+                <field name="location_id" type="col"/>
+                <field name="quantity" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="nexora_stock_onhand_view_graph" model="ir.ui.view">
+        <field name="name">nexora.stock.onhand.graph</field>
+        <field name="model">nexora.stock.onhand</field>
+        <field name="arch" type="xml">
+            <graph string="On Hand by Product" type="bar" stacked="1">
+                <field name="product_id"/>
+                <field name="location_id"/>
+                <field name="quantity" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="nexora_stock_onhand_view_search" model="ir.ui.view">
+        <field name="name">nexora.stock.onhand.search</field>
+        <field name="model">nexora.stock.onhand</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="product_id"/>
+                <field name="location_id"/>
+                <group>
+                    <filter name="group_product" string="Product"
+                            context="{'group_by': 'product_id'}"/>
+                    <filter name="group_location" string="Location"
+                            context="{'group_by': 'location_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_nexora_inventory_report" model="ir.actions.act_window">
+        <field name="name">Inventory Report</field>
+        <field name="res_model">nexora.stock.onhand</field>
+        <field name="view_mode">list,pivot,graph</field>
+    </record>
+
+</odoo>

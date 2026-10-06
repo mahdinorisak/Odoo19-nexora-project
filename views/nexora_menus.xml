@@ -229,4 +229,24 @@
         <field name="sequence">40</field>
     </record>
 
+    <menuitem id="menu_nexora_product_report" name="Product Report"
+              parent="menu_nexora_reports"
+              action="action_nexora_product_report" sequence="20"/>
+
+    <menuitem id="menu_nexora_sales_report" name="Sales Report"
+              parent="menu_nexora_reports"
+              action="action_nexora_sales_report" sequence="30"/>
+
+    <menuitem id="menu_nexora_purchase_report" name="Purchase Report"
+              parent="menu_nexora_reports"
+              action="action_nexora_purchase_report" sequence="40"/>
+
+    <menuitem id="menu_nexora_inventory_report" name="Inventory Report"
+              parent="menu_nexora_reports"
+              action="action_nexora_inventory_report" sequence="50"/>
+
+    <menuitem id="menu_nexora_production_report" name="Production Report"
+              parent="menu_nexora_reports"
+              action="action_nexora_production_report" sequence="60"/>
+
 </odoo>

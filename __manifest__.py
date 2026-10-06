@@ -55,6 +55,7 @@
         'views/phase22_inherit_views.xml',
         'views/settings_views.xml',
         'views/config_views.xml',
+        'views/report_views.xml',
         'views/nexora_menus.xml',
     ],
     'demo': [
