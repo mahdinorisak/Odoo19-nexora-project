@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_nexora_sequences" model="ir.actions.act_window">
+        <field name="name">Sequences</field>
+        <field name="res_model">ir.sequence</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('code', 'like', 'nexora.')]</field>
+    </record>
+
+    <record id="action_nexora_groups" model="ir.actions.act_window">
+        <field name="name">Access Groups</field>
+        <field name="res_model">res.groups</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain" eval="[('id', 'in', [ref('group_nexora_user'), ref('group_nexora_sales_manager'), ref('group_nexora_production_manager'), ref('group_nexora_admin')])]"/>
+    </record>
+
+    <record id="action_nexora_access_rights" model="ir.actions.act_window">
+        <field name="name">Access Rights</field>
+        <field name="res_model">ir.model.access</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('model_id.model', 'like', 'nexora.')]</field>
+    </record>
+
+    <record id="action_nexora_record_rules" model="ir.actions.act_window">
+        <field name="name">Record Rules</field>
+        <field name="res_model">ir.rule</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('model_id.model', 'like', 'nexora.')]</field>
+    </record>
+
+</odoo>

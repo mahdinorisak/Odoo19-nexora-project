@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Categories -->
+    <record id="demo_category_living" model="nexora.product.category">
+        <field name="name">Living Room</field>
+        <field name="code">LIV</field>
+    </record>
+    <record id="demo_category_bedroom" model="nexora.product.category">
+        <field name="name">Bedroom</field>
+        <field name="code">BED</field>
+    </record>
+    <record id="demo_category_office" model="nexora.product.category">
+        <field name="name">Office</field>
+        <field name="code">OFF</field>
+    </record>
+    <record id="demo_category_dining" model="nexora.product.category">
+        <field name="name">Dining</field>
+        <field name="code">DIN</field>
+    </record>
+    <record id="demo_category_raw" model="nexora.product.category">
+        <field name="name">Raw Materials</field>
+        <field name="code">RAW</field>
+    </record>
+
+    <!-- Types and materials -->
+    <record id="demo_type_finished" model="nexora.product.type">
+        <field name="name">Finished Furniture</field>
+    </record>
+    <record id="demo_type_raw" model="nexora.product.type">
+        <field name="name">Raw Material</field>
+    </record>
+    <record id="demo_type_component" model="nexora.product.type">
+        <field name="name">Component</field>
+    </record>
+
+    <record id="demo_material_oak" model="nexora.material">
+        <field name="name">Oak Wood</field>
+        <field name="cost">40</field>
+    </record>
+    <record id="demo_material_steel" model="nexora.material">
+        <field name="name">Steel</field>
+        <field name="cost">25</field>
+    </record>
+    <record id="demo_material_fabric" model="nexora.material">
+        <field name="name">Fabric</field>
+        <field name="cost">12</field>
+    </record>
+    <record id="demo_material_glass" model="nexora.material">
+        <field name="name">Glass</field>
+        <field name="cost">30</field>
+    </record>
+
+    <!-- Printing -->
+    <record id="demo_printing_logo" model="nexora.printing.type">
+        <field name="name">Logo Printing</field>
+        <field name="base_price">20</field>
+    </record>
+    <record id="demo_printing_engraving" model="nexora.printing.type">
+        <field name="name">Engraving</field>
+        <field name="base_price">35</field>
+    </record>
+    <record id="demo_printing_uv" model="nexora.printing.type">
+        <field name="name">UV Printing</field>
+        <field name="base_price">45</field>
+    </record>
+
+    <record id="demo_option_logo_small" model="nexora.printing.option">
+        <field name="name">Small</field>
+        <field name="printing_type_id" ref="demo_printing_logo"/>
+        <field name="extra_price">5</field>
+    </record>
+    <record id="demo_option_logo_large" model="nexora.printing.option">
+        <field name="name">Large</field>
+        <field name="printing_type_id" ref="demo_printing_logo"/>
+        <field name="extra_price">15</field>
+    </record>
+    <record id="demo_option_engraving_name" model="nexora.printing.option">
+        <field name="name">Name Plate</field>
+        <field name="printing_type_id" ref="demo_printing_engraving"/>
+        <field name="extra_price">12</field>
+    </record>
+    <record id="demo_option_uv_full" model="nexora.printing.option">
+        <field name="name">Full Surface</field>
+        <field name="printing_type_id" ref="demo_printing_uv"/>
+        <field name="extra_price">30</field>
+    </record>
+
+    <!-- Customers and vendors -->
+    <record id="demo_customer_type_retail" model="nexora.customer.type">
+        <field name="name">Retail</field>
+    </record>
+    <record id="demo_customer_type_wholesale" model="nexora.customer.type">
+        <field name="name">Wholesale</field>
+    </record>
+    <record id="demo_customer_type_corporate" model="nexora.customer.type">
+        <field name="name">Corporate</field>
+    </record>
+
+    <record id="demo_customer_amina" model="nexora.customer">
+        <field name="name">Amina Warsame</field>
+        <field name="customer_type_id" ref="demo_customer_type_retail"/>
+        <field name="email">amina@example.com</field>
+        <field name="phone">+252 61 000 0001</field>
+        <field name="city">Mogadishu</field>
+    </record>
+    <record id="demo_customer_hodan" model="nexora.customer">
+        <field name="name">Hodan Interiors</field>
+        <field name="customer_type_id" ref="demo_customer_type_wholesale"/>
+        <field name="email">orders@hodan.example.com</field>
+        <field name="phone">+252 61 000 0002</field>
+        <field name="city">Hargeisa</field>
+    </record>
+    <record id="demo_customer_bank" model="nexora.customer">
+        <field name="name">Horn Bank Head Office</field>
+        <field name="customer_type_id" ref="demo_customer_type_corporate"/>
+        <field name="email">procurement@hornbank.example.com</field>
+        <field name="city">Mogadishu</field>
+    </record>
+
+    <record id="demo_vendor_category_wood" model="nexora.vendor.category">
+        <field name="name">Wood Suppliers</field>
+    </record>
+    <record id="demo_vendor_category_fabric" model="nexora.vendor.category">
+        <field name="name">Fabric Suppliers</field>
+    </record>
+
+    <record id="demo_vendor_timber" model="nexora.vendor">
+        <field name="name">Banadir Timber</field>
+        <field name="vendor_category_id" ref="demo_vendor_category_wood"/>
+        <field name="email">sales@banadirtimber.example.com</field>
+        <field name="lead_time_days">7</field>
+        <field name="rating">3</field>
+    </record>
+    <record id="demo_vendor_textiles" model="nexora.vendor">
+        <field name="name">Coastal Textiles</field>
+        <field name="vendor_category_id" ref="demo_vendor_category_fabric"/>
+        <field name="email">hello@coastaltextiles.example.com</field>
+        <field name="lead_time_days">14</field>
+        <field name="rating">4</field>
+    </record>
+
+    <!-- Staff and a design -->
+    <record id="demo_department_production" model="nexora.department">
+        <field name="name">Production</field>
+    </record>
+    <record id="demo_department_design" model="nexora.department">
+        <field name="name">Design Studio</field>
+    </record>
+
+    <record id="demo_employee_designer" model="nexora.employee">
+        <field name="name">Yusuf Ali</field>
+        <field name="department_id" ref="demo_department_design"/>
+        <field name="job_title">Furniture Designer</field>
+        <field name="email">yusuf@example.com</field>
+    </record>
+    <record id="demo_employee_carpenter" model="nexora.employee">
+        <field name="name">Farhan Omar</field>
+        <field name="department_id" ref="demo_department_production"/>
+        <field name="job_id" ref="job_carpenter"/>
+        <field name="job_title">Carpenter</field>
+    </record>
+
+    <record id="demo_design_modern" model="nexora.design">
+        <field name="name">Modern Minimal</field>
+        <field name="designer_id" ref="demo_employee_designer"/>
+        <field name="description">Clean lines, light oak and soft fabric.</field>
+    </record>
+
+    <!-- Products -->
+    <record id="demo_product_plank" model="nexora.product">
+        <field name="name">Oak Plank</field>
+        <field name="category_id" ref="demo_category_raw"/>
+        <field name="product_type_id" ref="demo_type_raw"/>
+        <field name="material_id" ref="demo_material_oak"/>
+        <field name="cost_price">18</field>
+        <field name="sale_price">26</field>
+        <field name="min_quantity">20</field>
+    </record>
+    <record id="demo_product_fabric" model="nexora.product">
+        <field name="name">Upholstery Fabric</field>
+        <field name="category_id" ref="demo_category_raw"/>
+        <field name="product_type_id" ref="demo_type_raw"/>
+        <field name="material_id" ref="demo_material_fabric"/>
+        <field name="uom_id" ref="uom_meter"/>
+        <field name="cost_price">9</field>
+        <field name="sale_price">14</field>
+        <field name="min_quantity">30</field>
+    </record>
+    <record id="demo_product_screws" model="nexora.product">
+        <field name="name">Screw Pack</field>
+        <field name="category_id" ref="demo_category_raw"/>
+        <field name="product_type_id" ref="demo_type_component"/>
+        <field name="cost_price">2</field>
+        <field name="sale_price">4</field>
+        <field name="min_quantity">50</field>
+    </record>
+    <record id="demo_product_sofa" model="nexora.product">
+        <field name="name">Three-Seat Sofa</field>
+        <field name="category_id" ref="demo_category_living"/>
+        <field name="product_type_id" ref="demo_type_finished"/>
+        <field name="material_id" ref="demo_material_fabric"/>
+        <field name="design_id" ref="demo_design_modern"/>
+        <field name="cost_price">320</field>
+        <field name="sale_price">540</field>
+        <field name="min_quantity">2</field>
+        <field name="printing_type_ids" eval="[(6, 0, [ref('demo_printing_logo')])]"/>
+    </record>
+    <record id="demo_product_table" model="nexora.product">
+        <field name="name">Oak Dining Table</field>
+        <field name="category_id" ref="demo_category_dining"/>
+        <field name="product_type_id" ref="demo_type_finished"/>
+        <field name="material_id" ref="demo_material_oak"/>
+        <field name="design_id" ref="demo_design_modern"/>
+        <field name="cost_price">210</field>
+        <field name="sale_price">390</field>
+        <field name="min_quantity">3</field>
+        <field name="printing_type_ids" eval="[(6, 0, [ref('demo_printing_engraving')])]"/>
+    </record>
+    <record id="demo_product_desk" model="nexora.product">
+        <field name="name">Office Desk</field>
+        <field name="category_id" ref="demo_category_office"/>
+        <field name="product_type_id" ref="demo_type_finished"/>
+        <field name="material_id" ref="demo_material_steel"/>
+        <field name="cost_price">150</field>
+        <field name="sale_price">280</field>
+        <field name="min_quantity">2</field>
+    </record>
+
+    <record id="demo_variant_sofa_grey" model="nexora.product.variant">
+        <field name="product_id" ref="demo_product_sofa"/>
+        <field name="color">Grey</field>
+    </record>
+    <record id="demo_variant_sofa_green" model="nexora.product.variant">
+        <field name="product_id" ref="demo_product_sofa"/>
+        <field name="color">Green</field>
+        <field name="extra_price">30</field>
+    </record>
+
+    <!-- Bill of materials for the sofa -->
+    <record id="demo_bom_sofa" model="nexora.bom">
+        <field name="product_id" ref="demo_product_sofa"/>
+        <field name="quantity">1</field>
+        <field name="line_ids" eval="[
+            (0, 0, {'component_id': ref('demo_product_plank'), 'quantity': 6}),
+            (0, 0, {'component_id': ref('demo_product_fabric'), 'quantity': 4}),
+            (0, 0, {'component_id': ref('demo_product_screws'), 'quantity': 12}),
+        ]"/>
+    </record>
+
+    <!-- Starting stock: three received lots -->
+    <record id="demo_move_plank" model="nexora.stock.move">
+        <field name="product_id" ref="demo_product_plank"/>
+        <field name="quantity">120</field>
+        <field name="location_src_id" ref="location_vendors"/>
+        <field name="location_dest_id" ref="location_stock"/>
+        <field name="reference">Opening stock</field>
+    </record>
+    <record id="demo_move_fabric" model="nexora.stock.move">
+        <field name="product_id" ref="demo_product_fabric"/>
+        <field name="quantity">80</field>
+        <field name="location_src_id" ref="location_vendors"/>
+        <field name="location_dest_id" ref="location_stock"/>
+        <field name="reference">Opening stock</field>
+    </record>
+    <record id="demo_move_screws" model="nexora.stock.move">
+        <field name="product_id" ref="demo_product_screws"/>
+        <field name="quantity">400</field>
+        <field name="location_src_id" ref="location_vendors"/>
+        <field name="location_dest_id" ref="location_stock"/>
+        <field name="reference">Opening stock</field>
+    </record>
+    <function model="nexora.stock.move" name="action_done"
+              eval="[[ref('demo_move_plank'), ref('demo_move_fabric'), ref('demo_move_screws')]]"/>
+
+    <!-- A draft quotation -->
+    <record id="demo_quotation_amina" model="nexora.sale.order">
+        <field name="customer_id" ref="demo_customer_amina"/>
+        <field name="line_ids" eval="[
+            (0, 0, {'product_id': ref('demo_product_sofa'), 'quantity': 1,
+                    'printing_type_id': ref('demo_printing_logo'),
+                    'printing_option_id': ref('demo_option_logo_small')}),
+            (0, 0, {'product_id': ref('demo_product_table'), 'quantity': 1, 'discount': 5}),
+        ]"/>
+    </record>
+
+</odoo>

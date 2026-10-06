@@ -53,7 +53,12 @@
         'views/variant_views.xml',
         'views/job_views.xml',
         'views/phase22_inherit_views.xml',
+        'views/settings_views.xml',
+        'views/config_views.xml',
         'views/nexora_menus.xml',
+    ],
+    'demo': [
+        'data/demo.xml',
     ],
     'installable': True,
     'application': True,

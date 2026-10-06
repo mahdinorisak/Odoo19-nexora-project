@@ -2,7 +2,8 @@
 <odoo>
 
     <menuitem id="menu_nexora_root" name="Nexora" sequence="10"
-              groups="group_nexora_user"/>
+              groups="group_nexora_user"
+              web_icon="nexora_app,static/description/icon.png"/>
 
     <menuitem id="menu_nexora_products" name="Products"
               parent="menu_nexora_root" sequence="10"/>
@@ -176,5 +177,56 @@
     <menuitem id="menu_nexora_job" name="Job Positions"
               parent="menu_nexora_employees"
               action="action_nexora_job" sequence="30"/>
+
+    <menuitem id="menu_nexora_configuration" name="Configuration"
+              parent="menu_nexora_root" sequence="110"
+              groups="group_nexora_sales_manager,group_nexora_production_manager"/>
+
+    <menuitem id="menu_nexora_settings" name="Settings"
+              parent="menu_nexora_configuration"
+              action="action_nexora_settings" sequence="10"
+              groups="base.group_system"/>
+
+    <menuitem id="menu_nexora_sequences" name="Sequences"
+              parent="menu_nexora_configuration"
+              action="action_nexora_sequences" sequence="20"
+              groups="base.group_system"/>
+
+    <menuitem id="menu_nexora_product_config" name="Product Configuration"
+              parent="menu_nexora_configuration" sequence="30"/>
+
+    <menuitem id="menu_nexora_security" name="Security"
+              parent="menu_nexora_configuration" sequence="40"
+              groups="base.group_system"/>
+
+    <menuitem id="menu_nexora_groups" name="Access Groups"
+              parent="menu_nexora_security"
+              action="action_nexora_groups" sequence="10"/>
+
+    <menuitem id="menu_nexora_access_rights" name="Access Rights"
+              parent="menu_nexora_security"
+              action="action_nexora_access_rights" sequence="20"/>
+
+    <menuitem id="menu_nexora_record_rules" name="Record Rules"
+              parent="menu_nexora_security"
+              action="action_nexora_record_rules" sequence="30"/>
+
+    <!-- Move the setup lists under Product Configuration -->
+    <record id="menu_nexora_product_category" model="ir.ui.menu">
+        <field name="parent_id" ref="menu_nexora_product_config"/>
+        <field name="sequence">10</field>
+    </record>
+    <record id="menu_nexora_product_type" model="ir.ui.menu">
+        <field name="parent_id" ref="menu_nexora_product_config"/>
+        <field name="sequence">20</field>
+    </record>
+    <record id="menu_nexora_material" model="ir.ui.menu">
+        <field name="parent_id" ref="menu_nexora_product_config"/>
+        <field name="sequence">30</field>
+    </record>
+    <record id="menu_nexora_uom" model="ir.ui.menu">
+        <field name="parent_id" ref="menu_nexora_product_config"/>
+        <field name="sequence">40</field>
+    </record>
 
 </odoo>

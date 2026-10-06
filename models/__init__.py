@@ -33,3 +33,4 @@ from . import uom
 from . import design
 from . import variant
 from . import job
+from . import settings

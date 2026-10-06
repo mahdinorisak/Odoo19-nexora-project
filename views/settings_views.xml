@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_nexora" model="ir.ui.view">
+        <field name="name">res.config.settings.form.nexora</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="95"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app string="Nexora" name="nexora_app" groups="base.group_system">
+                    <block title="Sales and Purchasing" name="nexora_orders_block">
+                        <setting id="nexora_default_tax" string="Default Tax (%)"
+                                 help="Tax rate filled in on every new sales and purchase order.">
+                            <field name="nexora_default_tax_rate"/>
+                        </setting>
+                        <setting id="nexora_confirmation_email" string="Confirmation Email"
+                                 help="What happens when a quotation is confirmed.">
+                            <field name="nexora_confirmation_email"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_nexora_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="context">{'module': 'nexora_app', 'bin_size': False}</field>
+    </record>
+
+</odoo>
